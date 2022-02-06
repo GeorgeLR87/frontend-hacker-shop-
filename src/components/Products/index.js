@@ -7,13 +7,15 @@ export default function Products() {
 
   const ctx = useContext(ProductContext)
 
-  console.log(ctx);
+  const { products, hola } = ctx
+
+  
 
   return (
   <>
     <p>Listado de Productos</p>
 
-    {/* <p>{ctx.hola}</p> */}
+    <p>{ hola }</p>
           
   </>
   )

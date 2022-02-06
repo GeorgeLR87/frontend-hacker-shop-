@@ -4,7 +4,9 @@ import Layout from './components/Layout'
 import Home from './components/Home'
 import Register from './components/Auth/Register'
 import Login from './components/Auth/Login'
+
 import Products from './components/Products'
+import ProductState from "./context/Product/ProductState"
 
 
 
@@ -12,6 +14,7 @@ const Router = () => {
 
     return (
         <>
+        <ProductState>
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<Layout />}>
@@ -22,6 +25,7 @@ const Router = () => {
                     </Route>
                 </Routes>
             </BrowserRouter>
+        </ProductState>
         </>
     )
 }
