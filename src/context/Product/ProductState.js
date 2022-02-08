@@ -7,6 +7,12 @@ const ProductState = (props) => {
 
     const initialState = {
         products: [],
+        singleProduct: {
+            _id: '',
+            name: '',
+            price: '',
+            image: ''
+        },
         hola: 'mundo'
     }
     
@@ -33,6 +39,20 @@ const ProductState = (props) => {
             payload: list
         })
     }
+
+    const getProduct = async (productId) => {
+
+        const res = await axiosClient.get(`products/readone/${productId}`)
+
+        const selectedProduct = res.data.data
+
+        dispatch({
+            type: 'GET_PRODUCT',
+            payload: selectedProduct
+        })
+
+        
+    }
     
     
     return (
@@ -40,8 +60,10 @@ const ProductState = (props) => {
         value={{
             products: globalState.products,
             hola: globalState.hola,
+            singleProduct: globalState.singleProduct,
             changeText,
-            getProducts
+            getProducts,
+            getProduct
         }}
         >
             {props.children}

@@ -1,7 +1,9 @@
 // ./client/src/component/Products/index.js
 
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import ProductContext from './../../context/Product/ProductContext'
+
 
 export default function Products() {
 
@@ -38,7 +40,9 @@ export default function Products() {
           products.map((element) => {
             return (
               <li key={element._id}>
-                <p>{element.name}</p>
+                <Link to={`/products/${element._id}`}>
+                  <p>{element.name}</p>
+                </Link>                
                 <p>{element.price}</p>
 
               </li>
