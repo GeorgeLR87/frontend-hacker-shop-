@@ -9,6 +9,7 @@ import Login from './components/Auth/Login'
 import Products from './components/Products'
 import Single from './components/Products/Single'
 import ProductState from "./context/Product/ProductState"
+import CreateProduct from "./components/Products/CreateProduct"
 
 
 
@@ -28,6 +29,8 @@ const Router = () => {
                             <Route path='login' element={<Login />} />
                             {/* localhost:3000/products */}
                             <Route path='products' element={<Products />} />
+                            {/* localhost:3000/products/create */}
+                            <Route path='products/create' element={<CreateProduct />} />
                             {/* localhost:3000/products/:id */}
                             <Route path='products/:id' element={<Single />} />
                         </Route>
