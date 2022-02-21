@@ -12,25 +12,14 @@ const ProductState = (props) => {
             name: '',
             price: '',
             image: ''
-        },
-        hola: 'mundo'
+        }
     }
     
     const [globalState, dispatch] = useReducer(ProductReducer, initialState)
 
-    const changeText = () => {
-        dispatch({
-            type: 'CHANGE_TEXT',
-            payload: 'Cambio de Texto'
-        })
-    }
-
     const getProducts = async () => {
 
         const res = await axiosClient.get('products/readall')
-
-        console.log('Obteniendo Productos');
-        
 
         const list = res.data.data
 
@@ -49,21 +38,49 @@ const ProductState = (props) => {
         dispatch({
             type: 'GET_PRODUCT',
             payload: selectedProduct
-        })
+        })        
+    }
 
-        
+    const createProduct = async (form) => {
+
+        const res = await axiosClient.post('/products/create', form)
+     
+    }
+
+    const updateProduct = async (form, idProduct) => {
+
+        const res = await axiosClient.put(`products/edit/${idProduct}`, form)
+
+        const updatedProduct = res.data.data
+
+        dispatch({
+            type: 'UPDATE_PRODUCT',
+            payload: updatedProduct
+        })
+    }
+
+    const deleteProduct = async (idProduct) => {
+        const res = await axiosClient.delete(`products/delete/${idProduct}`)
+
+        const deletedProduct = res.data.data
+
+        dispatch({
+            type: 'DELETE_PRODUCT',
+            payload: deletedProduct
+        })
     }
     
     
     return (
         <ProductContext.Provider
         value={{
-            products: globalState.products,
-            hola: globalState.hola,
-            singleProduct: globalState.singleProduct,
-            changeText,
+            products: globalState.products,            
+            singleProduct: globalState.singleProduct,            
             getProducts,
-            getProduct
+            getProduct, 
+            createProduct,
+            updateProduct,
+            deleteProduct
         }}
         >
             {props.children}

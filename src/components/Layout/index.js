@@ -5,18 +5,18 @@ import Footer from './Footer'
 
 export default function Layout() {
   return (
-    <div>
-    <div className="flex flex-col h-screen justify-between">
-      
-      <Header />
-      
-      <main className="mb-auto">
-        <Outlet />
-      </main>
+    <div className='h-screen'>
+      <div className="flex flex-col h-screen justify-between bg-slate-100">
+        
+        <Header />
+        
+        <main className="mb-auto">
+          <Outlet />
+        </main>
 
-      <Footer />
+        <Footer />
 
-    </div>
+      </div>
   </div>
   )
 }

@@ -1,7 +1,10 @@
 import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import ProductContext from './../../context/Product/ProductContext'
 
 export default function CreateProduct() {
+
+    const navigate = useNavigate()
 
     // 1. Estado Global
     const ctx = useContext(ProductContext)
@@ -10,7 +13,7 @@ export default function CreateProduct() {
         createProduct
     } = ctx
 
-    console.log(createProduct)
+    
     // 2. Estado Local
     const [newProduct, setNewProduct] = useState({
         name: '',
@@ -28,10 +31,19 @@ export default function CreateProduct() {
         })
     }
 
+    const handleSubmit = (e) => {
+        
+        e.preventDefault()
+
+        createProduct(newProduct)
+
+        navigate('/products')
+    }
+
 
     return (
         <>
-        <form action='#' method='POST'>
+        <form onSubmit={ (event) => {handleSubmit(event) }}>
             <div className="lg:grid grid-cols-6">
                 <div className="">
 

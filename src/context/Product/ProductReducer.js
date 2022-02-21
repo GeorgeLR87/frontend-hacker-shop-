@@ -2,6 +2,7 @@ const reducer = (globalState, action) => {
 
     switch (action.type) {
         case 'GET_PRODUCT':
+        case 'UPDATE_PRODUCT':
             return {
                 ...globalState,
                 singleProduct: action.payload
@@ -11,12 +12,6 @@ const reducer = (globalState, action) => {
             return {
                 ...globalState,
                 products: action.payload
-            }
-
-        case 'CHANGE_TEXT':
-            return {
-                ...globalState,
-                hola: action.payload
             }
 
         default:

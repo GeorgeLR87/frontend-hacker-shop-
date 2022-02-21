@@ -1,57 +1,58 @@
 // ./client/src/component/Products/index.js
 
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import ProductContext from './../../context/Product/ProductContext'
-
+import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import ProductContext from "./../../context/Product/ProductContext";
 
 export default function Products() {
+  const ctx = useContext(ProductContext);
 
-  const ctx = useContext(ProductContext)
+  const { products, getProducts } = ctx;
 
-  const { 
-    products, 
-    hola, 
-    changeText,
-    getProducts
-  } = ctx
-
-  
+  useEffect(() => {
+    getProducts()
+  }, [])
 
   return (
-  <>
-    <p>Listado de Productos</p>
+            <>
+                <div className="flex flex-row border-yellow-500 border-2 h-screen w-full bg-slate-100">
+                    <div className="grid grid-cols-3 grid-rows-2  justify-center p-6 w-4/6  border-2 border-pink-500">
+                      {
+                        products.map(element => {
+                          return (
+                                    <section className="w-80 h-80 flex flex-col justify-between items-center border-2 border-emerald-500 bg-white ">
+                                        <div className=" w-80 h-80 border-2 flex flex-col justify-around items-center border-red-500">
+                                          <Link to={`/products/${element._id}`}>
+                                            <img
+                                              alt="Your Cart"
+                                              src={element.image}
+                                              className="border-2 border-blue-500 w-32"
+                                            />
+                                          </Link>
 
-    <p>{ hola }</p>
+                                          <div className="">
+                                            <Link to={`/products/${element._id}`}>
+                                              <h5 className="text-sm">{element.name}</h5>
+                                            </Link>
+                                            <p className="text-sm"> $ {element.price}</p>
+                                          </div>
 
-    <button onClick={ () => { changeText() }}>
-      Boton cambiar Texto
-    </button>
+                                          <div className="">
+                                            <button className="border border-green-600 text-green-600 h-6 w-24 flex justify-center items-center
+                                            text-xs rounded-sm">Add To Cart</button>
 
-    <button onClick={ () => { getProducts() }}>
-      Listar Productos
-    </button>
-
-    <div>
-      <h2>Listado de Productos</h2>
-
-      <ul>
-        {
-          products.map((element) => {
-            return (
-              <li key={element._id}>
-                <Link to={`/products/${element._id}`}>
-                  <p>{element.name}</p>
-                </Link>                
-                <p>{element.price}</p>
-
-              </li>
-            )
-          })
-        }
-      </ul>
-    </div>
-          
-  </>
-  )
+                                            <button className="border border-red-700 bg-red-700 text-white h-6 w-20 flex justify-center items-center
+                                            text-xs rounded-sm"
+                                            >Remove</button>
+                                          </div>
+                                        </div>
+                                    </section>
+                                )
+                              }
+                        )
+                      }
+                    </div>
+                </div>
+            </>
+        )
 }
